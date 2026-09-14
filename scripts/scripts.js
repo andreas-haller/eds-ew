@@ -215,3 +215,26 @@ async function loadPage() {
 }
 
 loadPage();
+
+;(() => {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has('quick-edit')) return;
+
+  document.body.classList.add('quick-edit');
+
+  const payload = (() => {
+    try {
+      const q = params.get('quick-edit');
+      return q && q !== 'on' ? JSON.parse(decodeURIComponent(q)) : {};
+    } catch { return {}; }
+  })();
+
+  //import('https://da.live/nx/public/plugins/quick-edit/quick-edit.js')
+  import('https://reload--da-nx--adobe.aem.live/nx/public/plugins/quick-edit/quick-edit.js')
+    .then(({ default: loadQuickEdit }) => loadQuickEdit({ ...payload, reloadMode: 'decorateMain', }, (body) => {
+      const main = body.querySelector('main');
+      decorateMain(main);
+      loadSections(main);
+    }))
+    .catch((e) => { console.error('[quick-edit] failed to load plugin', e); });
+})();
