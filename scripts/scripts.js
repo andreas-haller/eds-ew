@@ -229,8 +229,8 @@ loadPage();
     } catch { return {}; }
   })();
 
-  //import('https://da.live/nx/public/plugins/quick-edit/quick-edit.js')
-  import('https://reload--da-nx--adobe.aem.live/nx/public/plugins/quick-edit/quick-edit.js')
+  import('https://da.live/nx/public/plugins/quick-edit/quick-edit.js')
+  //import('https://reload--da-nx--adobe.aem.live/nx/public/plugins/quick-edit/quick-edit.js')
     .then(({ default: loadQuickEdit }) => loadQuickEdit({ ...payload, reloadScope: 'main', }, (body) => {
       const main = body.querySelector('main');
       decorateMain(main);
