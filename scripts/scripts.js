@@ -140,17 +140,6 @@ function decorateButtons(main) {
       em.replaceWith(a);
     }
   });
-  main.querySelectorAll('p strong').forEach((strong) => {
-    const p = strong.closest('p');
-    if (p?.childNodes?.length === 1) {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'strong-wrapper';
-      wrapper.appendChild(strong);
-      p.replaceWith(wrapper);
-      wrapper.append(p);
-    }
-  });
-
 }
 
 /**
